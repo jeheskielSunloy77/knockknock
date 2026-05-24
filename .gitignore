@@ -1,0 +1,4 @@
+/knockknock
+*.test
+*.out
+coverage.txt
