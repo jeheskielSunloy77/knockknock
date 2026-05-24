@@ -1,0 +1,11 @@
+{
+  "vendor": "reblaze",
+  "signals": [
+    "H:set-cookie:rbzid=",
+    "H:set-cookie:rbzsessionid=",
+    "H:set-cookie:rbz[a-z0-9_]*=",
+    "H:server:(?i:reblaze)\\b",
+    "B:.*\\brbzid\\b",
+    "B:.*(?i:www\\.reblaze\\.com)"
+  ]
+}

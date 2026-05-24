@@ -1,0 +1,11 @@
+{
+  "vendor": "geetest",
+  "signals": [
+    "B:.*\\bstatic\\.geetest\\.com\\b",
+    "B:.*\\bapi\\.geetest\\.com\\b",
+    "B:.*\\bgeetest\\.com/(?:gettype|get|ajax)\\.php",
+    "B:.*\\binitGeetest4?\\b",
+    "B:.*\\bgeetest_(?:challenge|validate|seccode)\\b",
+    "B:.*\\bgt_captcha_obj\\b"
+  ]
+}

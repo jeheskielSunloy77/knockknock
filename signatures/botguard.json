@@ -1,0 +1,9 @@
+{
+  "vendor": "botguard",
+  "signals": [
+    "H:set-cookie:__Secure-[0-9I]?PSID",
+    "H:set-cookie:__Secure-[0-9I]?PAPISID",
+    "B:.*\\bbotguard\\.bg\\b",
+    "B:.*www\\.google\\.com/js/bg/"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "vendor": "friendlycaptcha",
+  "signals": [
+    "B:.*\\b(?:api|cdn|eu)\\.friendlycaptcha\\.com\\b",
+    "B:.*\\bfriendlycaptcha\\.com/api/v1/puzzle\\b",
+    "B:.*\\bfriendly-js\\.pages\\.dev\\b",
+    "B:.*\\bfriendly-challenge@\\d",
+    "B:.*\\bclass=[\"']?[^\"'>]*\\bfrc-captcha\\b",
+    "B:.*\\b(?:friendlyChallenge|FriendlyCaptchaSDK)\\b"
+  ]
+}

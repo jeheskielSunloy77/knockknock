@@ -1,0 +1,9 @@
+{
+  "vendor": "cheq",
+  "signals": [
+    "B:.*\\bCheqSdk\\b",
+    "B:.*\\bcheq_invalidUsers\\b",
+    "B:.*\\bclicktrue_invocation\\.js\\b",
+    "B:.*\\bcheqzone\\.com\\b"
+  ]
+}

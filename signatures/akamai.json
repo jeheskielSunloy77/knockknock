@@ -1,0 +1,34 @@
+{
+  "vendor": "akamai",
+  "signals": [
+    "H:set-cookie:_abck=",
+    "H:set-cookie:sbsd=",
+    "H:set-cookie:sbsd_o=",
+    "H:set-cookie:sec_cpt=",
+    "H:set-cookie:ak_bmsc=",
+    "H:set-cookie:bm_sz=",
+    "H:set-cookie:bm_sv=",
+    "H:set-cookie:bm_mi=",
+    "B:.*/akam/",
+    "B:.*/_sec/sbsd/",
+    "B:.*/\\.well-known/sbsd/",
+    "B:.*/_sec/cp_challenge/",
+    "B:.*\\bid=\"sec-cpt-if\"",
+    "B:.*\\bsec-cp-challenge\\b",
+    "B:.*\\bbazadebezolkohpepadr\\b",
+    "B:.*Reference #\\d+\\.[0-9a-f]+\\.\\d+\\.[0-9a-f]+",
+    "B:<script[^>]*\\bsrc=\"/(?:[a-zA-Z0-9_-]{2,30}/){4,}[a-zA-Z0-9_-]{2,30}\""
+  ],
+  "challenge": [
+    "H:set-cookie:sbsd=",
+    "H:set-cookie:sbsd_o=",
+    "H:set-cookie:sec_cpt=",
+    "B:.*/_sec/sbsd/",
+    "B:.*/\\.well-known/sbsd/",
+    "B:.*/_sec/cp_challenge/",
+    "B:.*\\bid=\"sec-cpt-if\"",
+    "B:.*\\bsec-cp-challenge\\b",
+    "B:.*\\bbazadebezolkohpepadr\\b",
+    "B:.*Reference #\\d+\\.[0-9a-f]+\\.\\d+\\.[0-9a-f]+"
+  ]
+}

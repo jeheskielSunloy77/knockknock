@@ -1,0 +1,9 @@
+{
+  "vendor": "hcaptcha",
+  "signals": [
+    "B:.*\\b(?:js|api|newassets)\\.hcaptcha\\.com\\b",
+    "B:.*<(?:div|span)[^>]*\\bclass=[\"']?[^\"'>]*\\bh-captcha\\b",
+    "B:.*\\bdata-hcaptcha-sitekey\\b",
+    "B:.*\\bhcaptcha\\.(?:render|execute|getResponse)\\b"
+  ]
+}

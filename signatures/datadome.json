@@ -1,0 +1,19 @@
+{
+  "vendor": "datadome",
+  "signals": [
+    "H:set-cookie:datadome=",
+    "H:x-datadome-cid:",
+    "B:.*https://ct\\.captcha-delivery\\.com/[ic]\\.js",
+    "B:.*\\bgeo\\.captcha-delivery\\.com\\b",
+    "B:.*https://dd\\.prod\\.captcha-delivery\\.com/image/",
+    "B:.*var dd=\\{'rt':'[ci]'",
+    "B:.*Please enable JS and disable any ad blocker"
+  ],
+  "challenge": [
+    "B:.*https://ct\\.captcha-delivery\\.com/[ic]\\.js",
+    "B:.*\\bgeo\\.captcha-delivery\\.com\\b",
+    "B:.*https://dd\\.prod\\.captcha-delivery\\.com/image/",
+    "B:.*var dd=\\{'rt':'[ci]'",
+    "B:.*Please enable JS and disable any ad blocker"
+  ]
+}

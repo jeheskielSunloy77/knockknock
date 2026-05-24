@@ -1,0 +1,7 @@
+{
+  "vendor": "shapesecurity",
+  "signals": [
+    "H:x-[a-z0-9]{8}-[abcdfz]:",
+    "H:set-cookie:[A-Za-z0-9]{8}=[^;]*\\|1\\|[01]\\|"
+  ]
+}

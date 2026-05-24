@@ -1,0 +1,22 @@
+{
+  "vendor": "kasada",
+  "signals": [
+    "H:x-kpsdk-ct:",
+    "H:x-kpsdk-st:",
+    "H:x-kpsdk-fc:",
+    "H:x-kpsdk-h:",
+    "H:set-cookie:tkrm_alpekz_",
+    "B:.*window\\.KPSDK\\s*=",
+    "B:.*\\bKPSDK\\.start\\s*=\\s*KPSDK\\.now\\(\\)",
+    "B:.*\\bKPSDK\\.scriptStart\\s*=\\s*KPSDK\\.now\\(\\)",
+    "B:.*/ips\\.js\\?[^\"']*\\btkrm_alpekz_",
+    "B:.*\\bx-kpsdk-im="
+  ],
+  "challenge": [
+    "B:.*window\\.KPSDK\\s*=",
+    "B:.*\\bKPSDK\\.start\\s*=\\s*KPSDK\\.now\\(\\)",
+    "B:.*\\bKPSDK\\.scriptStart\\s*=\\s*KPSDK\\.now\\(\\)",
+    "B:.*/ips\\.js\\?[^\"']*\\btkrm_alpekz_",
+    "B:.*\\bx-kpsdk-im="
+  ]
+}

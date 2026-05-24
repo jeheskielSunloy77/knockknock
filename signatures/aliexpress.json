@@ -1,0 +1,11 @@
+{
+  "vendor": "aliexpress",
+  "signals": [
+    "H:set-cookie:x5sec=",
+    "B:.*\\bx5secdata\\b",
+    "B:.*_____tmd_____/punish\\?x5secdata",
+    "B:.*nocaptcha\\.aliyun\\.com",
+    "B:.*o\\.alicdn\\.com/captcha-frontend/aliyunCaptcha",
+    "B:.*g\\.alicdn\\.com/sd/nch5/index\\.js"
+  ]
+}

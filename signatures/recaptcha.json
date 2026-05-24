@@ -1,0 +1,12 @@
+{
+  "vendor": "recaptcha",
+  "signals": [
+    "B:.*www\\.google\\.com/recaptcha/",
+    "B:.*www\\.gstatic\\.com/recaptcha/",
+    "B:.*www\\.recaptcha\\.net/recaptcha/",
+    "B:.*\\brecaptcha/api\\.js",
+    "B:.*\\bclass=[\"']?[^\"'>]*\\bg-recaptcha\\b",
+    "B:.*\\bgrecaptcha\\.(?:execute|render|ready)\\b",
+    "B:.*\\b___grecaptcha_cfg\\b"
+  ]
+}

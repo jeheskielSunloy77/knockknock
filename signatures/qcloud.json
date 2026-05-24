@@ -1,0 +1,10 @@
+{
+  "vendor": "qcloud",
+  "signals": [
+    "B:.*turing\\.captcha\\.qcloud\\.com",
+    "B:.*turing\\.captcha\\.gtimg\\.com",
+    "B:.*\\bnew TencentCaptcha\\b",
+    "B:.*ssl\\.captcha\\.qq\\.com",
+    "B:.*\\bt\\.captcha\\.qq\\.com\\b"
+  ]
+}

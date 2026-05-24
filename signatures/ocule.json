@@ -1,0 +1,7 @@
+{
+  "vendor": "ocule",
+  "signals": [
+    "B:.*proxy\\.ocule\\.co\\.uk/script\\.js",
+    "B:.*(?i:(?:https?://)?(?:www\\.)?ocule\\.co\\.uk)"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "vendor": "sucuri",
+  "signals": [
+    "H:server:(?i:Sucuri)/",
+    "H:x-sucuri-id:",
+    "H:x-sucuri-cache:",
+    "H:set-cookie:sucuri_cloudproxy_uuid_",
+    "B:.*(?i:Access Denied - Sucuri Website Firewall)",
+    "B:.*(?i:Sucuri WebSite Firewall)",
+    "B:.*cloudproxy@sucuri\\.net"
+  ]
+}

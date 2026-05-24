@@ -1,0 +1,11 @@
+{
+  "vendor": "funcaptcha",
+  "signals": [
+    "B:.*\\b(?:cdn|meta-api|client-api)\\.arkoselabs\\.com",
+    "B:.*\\bapi\\.funcaptcha\\.com",
+    "B:.*/fc/api/nojs/",
+    "B:.*/v2/[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}/enforcement\\.[0-9a-f]+\\.js",
+    "B:.*\\bArkoseEnforcement\\b",
+    "B:.*\\bid=[\"']?FunCaptcha\\b"
+  ]
+}

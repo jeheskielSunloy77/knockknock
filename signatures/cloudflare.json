@@ -1,0 +1,25 @@
+{
+  "vendor": "cloudflare",
+  "signals": [
+    "H:set-cookie:__cf_bm=",
+    "H:set-cookie:cf_clearance=",
+    "H:cf-mitigated:",
+    "B:.*/cdn-cgi/challenge-platform/",
+    "B:.*challenges\\.cloudflare\\.com",
+    "B:.*\\b_cf_chl_opt\\b",
+    "B:.*__CF\\$cv\\$params",
+    "B:.*__cf_chl_(?:rt|f|jschl)_tk",
+    "B:.*<title>Just a moment\\.\\.\\.</title>",
+    "B:.*Sorry, you have been blocked"
+  ],
+  "challenge": [
+    "H:cf-mitigated:",
+    "B:.*/cdn-cgi/challenge-platform/",
+    "B:.*challenges\\.cloudflare\\.com",
+    "B:.*\\b_cf_chl_opt\\b",
+    "B:.*__CF\\$cv\\$params",
+    "B:.*__cf_chl_(?:rt|f|jschl)_tk",
+    "B:.*<title>Just a moment\\.\\.\\.</title>",
+    "B:.*Sorry, you have been blocked"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "vendor": "captchaeu",
+  "signals": [
+    "B:.*\\bcaptcha\\.eu/widget\\b",
+    "B:.*\\b(?:api|widget|js)\\.captcha\\.eu\\b",
+    "B:.*\\bclass=[\"']?[^\"'>]*\\bcaptchaeu-widget\\b",
+    "B:.*\\bdata-captchaeu-sitekey\\b",
+    "B:.*\\bCaptchaEU\\.(?:render|execute|reset|getResponse)\\b",
+    "B:.*<script[^>]+\\bsrc=[\"'][^\"']*\\bcaptcha\\.eu/",
+    "B:.*<iframe[^>]+\\bsrc=[\"'][^\"']*\\bcaptcha\\.eu\\b"
+  ]
+}

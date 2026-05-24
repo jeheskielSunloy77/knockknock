@@ -1,0 +1,13 @@
+{
+  "vendor": "aws_waf",
+  "signals": [
+    "H:set-cookie:aws-waf-token=",
+    "H:set-cookie:awswaf-token=",
+    "H:x-amzn-waf-action:",
+    "B:.*\\bhttps?://[a-z0-9.-]*\\.token\\.awswaf\\.com\\b",
+    "B:.*\\.token\\.awswaf\\.com/[a-z0-9-]+/challenge\\.js",
+    "B:.*\\bAwsWafIntegration\\b",
+    "B:.*\\bawsWafCookieDomainList\\b",
+    "B:.*\\.captcha\\.awswaf\\.com\\b"
+  ]
+}

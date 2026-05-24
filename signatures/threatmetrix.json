@@ -1,0 +1,9 @@
+{
+  "vendor": "threatmetrix",
+  "signals": [
+    "B:.*\\b[a-z0-9-]+\\.online-metrix\\.net\\b",
+    "B:.*\\bonline-metrix\\.net/fp/(?:tags|check|clear)\\.(?:js|png)",
+    "B:.*\\bThreatMetrix\\b",
+    "B:.*\\btmx_profiling\\w*"
+  ]
+}
