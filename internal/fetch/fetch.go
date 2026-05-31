@@ -67,11 +67,11 @@ func fetchChain(rawURL string, do doer) ([]byte, error) {
 		}
 		writeRawResponse(&chain, resp)
 
-		loc := headerGet(resp.header, "Location")
-		if !isRedirect(resp.statusCode) || loc == "" || hop >= maxRedirects {
+		loc := HeaderGet(resp.header, "Location")
+		if !IsRedirect(resp.statusCode) || loc == "" || hop >= maxRedirects {
 			break
 		}
-		next, err := resolveLocation(current, loc)
+		next, err := ResolveLocation(current, loc)
 		if err != nil {
 			break
 		}
@@ -181,7 +181,7 @@ func writeRawResponse(buf *bytes.Buffer, resp *hopResponse) {
 	buf.WriteString("\r\n")
 }
 
-func headerGet(headers map[string][]string, key string) string {
+func HeaderGet(headers map[string][]string, key string) string {
 	if values := headers[key]; len(values) > 0 {
 		return values[0]
 	}
@@ -193,7 +193,7 @@ func headerGet(headers map[string][]string, key string) string {
 	return ""
 }
 
-func isRedirect(code int) bool {
+func IsRedirect(code int) bool {
 	switch code {
 	case 301, 302, 303, 307, 308:
 		return true
@@ -202,7 +202,7 @@ func isRedirect(code int) bool {
 	}
 }
 
-func resolveLocation(base, loc string) (string, error) {
+func ResolveLocation(base, loc string) (string, error) {
 	b, err := url.Parse(base)
 	if err != nil {
 		return "", err

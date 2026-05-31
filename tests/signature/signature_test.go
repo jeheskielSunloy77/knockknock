@@ -1,14 +1,16 @@
-package signature
+package signature_test
 
 import (
 	"os"
 	"path/filepath"
 	"regexp"
 	"testing"
+
+	"knockknock/internal/signature"
 )
 
 func TestCompileFromRepositorySignatures(t *testing.T) {
-	pattern, err := Compile("../../signatures", "")
+	pattern, err := signature.Compile("../../signatures", "")
 	if err != nil {
 		t.Fatalf("Compile(): %v", err)
 	}
@@ -24,7 +26,7 @@ func TestChallengeMustBeSignalSubset(t *testing.T) {
 	if err := os.WriteFile(path, []byte(raw), 0o644); err != nil {
 		t.Fatal(err)
 	}
-	if _, err := CompileChallenge(dir, ""); err == nil {
+	if _, err := signature.CompileChallenge(dir, ""); err == nil {
 		t.Fatal("CompileChallenge() error = nil, want subset validation error")
 	}
 }

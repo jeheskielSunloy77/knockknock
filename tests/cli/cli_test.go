@@ -1,14 +1,16 @@
-package cli
+package cli_test
 
 import (
 	"bytes"
 	"strings"
 	"testing"
+
+	"knockknock/internal/cli"
 )
 
 func TestRunDetectsFromStdinReadable(t *testing.T) {
 	var out, stderr bytes.Buffer
-	code := Run(Config{
+	code := cli.Run(cli.Config{
 		Args:   nil,
 		Stdin:  strings.NewReader("HTTP/1.1 403\r\nSet-Cookie: __cf_bm=abc; path=/\r\n\r\nblocked"),
 		Stdout: &out,
@@ -24,7 +26,7 @@ func TestRunDetectsFromStdinReadable(t *testing.T) {
 
 func TestRunNoDetectionExitOne(t *testing.T) {
 	var out, stderr bytes.Buffer
-	code := Run(Config{
+	code := cli.Run(cli.Config{
 		Stdin:  strings.NewReader("HTTP/1.1 200 OK\r\nServer: nginx\r\n\r\nhello"),
 		Stdout: &out,
 		Stderr: &stderr,
@@ -39,7 +41,7 @@ func TestRunNoDetectionExitOne(t *testing.T) {
 
 func TestRunJSON(t *testing.T) {
 	var out, stderr bytes.Buffer
-	code := Run(Config{
+	code := cli.Run(cli.Config{
 		Args:   []string{"--json"},
 		Stdin:  strings.NewReader("HTTP/1.1 403\r\ncf-mitigated: challenge\r\n\r\n"),
 		Stdout: &out,
@@ -55,7 +57,7 @@ func TestRunJSON(t *testing.T) {
 
 func TestRunUnknownFlag(t *testing.T) {
 	var stderr bytes.Buffer
-	code := Run(Config{Args: []string{"--bad"}, Stderr: &stderr})
+	code := cli.Run(cli.Config{Args: []string{"--bad"}, Stderr: &stderr})
 	if code != 2 {
 		t.Fatalf("Run() code = %d", code)
 	}
