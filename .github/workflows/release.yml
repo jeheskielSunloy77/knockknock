@@ -30,7 +30,7 @@ jobs:
             -o "knockknock_${GITHUB_REF_NAME#v}_${{ matrix.os }}_${{ matrix.arch }}${ext}" \
             ./cmd/knockknock
       - name: Compress with UPX
-        if: ${{ matrix.os != 'darwin' }}
+        if: ${{ matrix.os != 'darwin' && !(matrix.os == 'windows' && matrix.arch == 'arm64') }}
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq upx-ucl
           f="knockknock_${GITHUB_REF_NAME#v}_${{ matrix.os }}_${{ matrix.arch }}${{ matrix.os == 'windows' && '.exe' || '' }}"
