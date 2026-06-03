@@ -32,9 +32,10 @@ jobs:
       - name: Compress with UPX
         if: ${{ matrix.os != 'darwin' && !(matrix.os == 'windows' && matrix.arch == 'arm64') }}
         run: |
+          ext=""
+          [ "${{ matrix.os }}" = "windows" ] && ext=".exe"
           sudo apt-get update -qq && sudo apt-get install -y -qq upx-ucl
-          f="knockknock_${GITHUB_REF_NAME#v}_${{ matrix.os }}_${{ matrix.arch }}${{ matrix.os == 'windows' && '.exe' || '' }}"
-          upx --best --lzma "$f"
+          upx --best --lzma "knockknock_${GITHUB_REF_NAME#v}_${{ matrix.os }}_${{ matrix.arch }}${ext}"
       - uses: softprops/action-gh-release@v2
         with:
           files: knockknock_*
