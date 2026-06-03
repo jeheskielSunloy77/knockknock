@@ -72,7 +72,7 @@ curl -isS -L https://example.com | knockknock --json
     --timeout D    fetch timeout, default 30s
     --max-body N   max body bytes to scan, default 64KiB
 -h, --help         show help
--V, --version      show version
+-v, --version      show version
 ```
 
 The default URL fetch uses `tls-client` and browser-like request headers because

@@ -78,7 +78,7 @@ Options:
       --timeout D    fetch timeout (default 30s)
       --max-body N   max body bytes to scan; supports KiB/MiB suffixes (default 64KiB)
   -h, --help         show help and exit
-  -V, --version      show version and exit
+  -v, --version      show version and exit
 
 Commands:
   compile [--dir signatures] [--out internal/detect/regex_presence.re2.txt]
@@ -175,7 +175,7 @@ func parseOptions(args []string) (options, string, error) {
 		switch {
 		case arg == "-h" || arg == "--help":
 			return opts, "help", nil
-		case arg == "-V" || arg == "--version":
+		case arg == "-v" || arg == "--version":
 			return opts, "version", nil
 		case arg == "-c" || arg == "--challenge":
 			opts.challenge = true
