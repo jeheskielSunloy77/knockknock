@@ -31,6 +31,7 @@ jobs:
             ./cmd/knockknock
       - name: Compress with UPX
         if: ${{ matrix.os != 'darwin' && !(matrix.os == 'windows' && matrix.arch == 'arm64') }}
+        continue-on-error: true
         run: |
           ext=""
           [ "${{ matrix.os }}" = "windows" ] && ext=".exe"
