@@ -9,6 +9,10 @@ permissions:
 
 jobs:
   release:
+    strategy:
+      matrix:
+        os: [linux, darwin, windows]
+        arch: [amd64, arm64]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -16,7 +20,14 @@ jobs:
         with:
           go-version: '1.24.x'
           cache: true
-      - run: go build -ldflags "-X main.version=${GITHUB_REF_NAME#v}" ./cmd/knockknock
+      - name: Build
+        run: |
+          ext=""
+          if [ "${{ matrix.os }}" = "windows" ]; then ext=".exe"; fi
+          GOOS=${{ matrix.os }} GOARCH=${{ matrix.arch }} \
+            go build -ldflags "-X main.version=${GITHUB_REF_NAME#v}" \
+            -o "knockknock_${GITHUB_REF_NAME#v}_${{ matrix.os }}_${{ matrix.arch }}${ext}" \
+            ./cmd/knockknock
       - uses: softprops/action-gh-release@v2
         with:
-          files: knockknock
+          files: knockknock_*
