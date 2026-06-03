@@ -1,4 +1,4 @@
-module knockknock
+module github.com/jeheskielSunloy77/knockknock
 
 go 1.24.1
 
