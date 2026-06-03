@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
-set -euo pipefail
+#!/bin/sh
+set -eu
 
 REPO="jeheskielSunloy77/knockknock"
 BIN="knockknock"
@@ -14,8 +14,15 @@ info() {
 }
 
 # --- detect OS / arch ---
-OS="$(uname -s | tr '[:upper:]' '[:lower:]')"
+OS="$(uname -s)"
 ARCH="$(uname -m)"
+
+# normalize OS name to lowercase
+case "$OS" in
+  Linux|linux)   OS="linux"   ;;
+  Darwin|darwin) OS="darwin"  ;;
+  Windows|windows) OS="windows" ;;
+esac
 
 case "$OS" in
   linux)   ;;
@@ -37,9 +44,8 @@ if [ -n "${VERSION:-}" ]; then
   TAG="v${VERSION#v}"
 else
   info "fetching latest release version ..."
-  TAG="$(curl -sSfL "https://api.github.com/repos/$REPO/releases/latest" \
-    | grep '"tag_name"' \
-    | sed 's/.*"tag_name": "\(.*\)",/\1/')"
+  TAG="$(curl -sSfL "https://api.github.com/repos/$REPO/releases/latest")"
+  TAG="$(printf '%s' "$TAG" | sed -n 's/.*"tag_name": "\(.*\)",/\1/p')"
   [ -n "$TAG" ] || die "could not determine latest release"
 fi
 
@@ -64,7 +70,13 @@ curl -sSfL -o "$TMPDIR/checksums.txt" "$BASEURL/$ASSET"
 
 # --- verify checksum ---
 info "verifying checksum ..."
-(cd "$TMPDIR" && sha256sum --ignore-missing --check "checksums.txt") || die "checksum mismatch"
+if command -v sha256sum >/dev/null 2>&1; then
+  (cd "$TMPDIR" && sha256sum --ignore-missing --check "checksums.txt") || die "checksum mismatch"
+elif command -v shasum >/dev/null 2>&1; then
+  (cd "$TMPDIR" && shasum -a 256 --ignore-missing --check "checksums.txt") || die "checksum mismatch"
+else
+  die "neither sha256sum nor shasum found"
+fi
 
 chmod +x "$TMPDIR/$BINARY"
 
