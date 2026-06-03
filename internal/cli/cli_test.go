@@ -1,8 +1,11 @@
 package cli
 
 import (
+	"bytes"
 	"strings"
 	"testing"
+
+	"github.com/jeheskielSunloy77/knockknock/internal/detect"
 )
 
 func TestBannerContainsName(t *testing.T) {
@@ -20,5 +23,68 @@ func TestBannerContainsDescription(t *testing.T) {
 func TestBannerContainsExamples(t *testing.T) {
 	if !strings.Contains(banner, "example") {
 		t.Fatal("banner missing examples section")
+	}
+}
+
+func TestWriteVerdictProtected(t *testing.T) {
+	var buf bytes.Buffer
+	verdict := detect.Verdict{Protected: true, Vendors: []string{"cloudflare"}}
+	err := writeVerdict(&buf, verdict, false)
+	if err != nil {
+		t.Fatal(err)
+	}
+	out := buf.String()
+	if !strings.Contains(out, "who's there?") {
+		t.Fatal("expected 'who's there?' in output, got:", out)
+	}
+	if !strings.Contains(out, "cloudflare") {
+		t.Fatal("expected vendor name in output, got:", out)
+	}
+}
+
+func TestWriteVerdictNotProtected(t *testing.T) {
+	var buf bytes.Buffer
+	verdict := detect.Verdict{Protected: false}
+	err := writeVerdict(&buf, verdict, false)
+	if err != nil {
+		t.Fatal(err)
+	}
+	out := buf.String()
+	if !strings.Contains(out, "who's there?") {
+		t.Fatal("expected 'who's there?' in output, got:", out)
+	}
+}
+
+func TestWriteVerdictJSON(t *testing.T) {
+	var buf bytes.Buffer
+	verdict := detect.Verdict{Protected: true, Vendors: []string{"cloudflare"}, Mode: "presence", Source: "stdin"}
+	err := writeVerdict(&buf, verdict, true)
+	if err != nil {
+		t.Fatal(err)
+	}
+	out := buf.String()
+	if !strings.Contains(out, `"protected": true`) {
+		t.Fatal("expected JSON output, got:", out)
+	}
+	if strings.Contains(out, "Knock knock!") {
+		t.Fatal("JSON output should not contain knock-knock joke")
+	}
+}
+
+func TestFormatVendors(t *testing.T) {
+	tests := []struct {
+		input []string
+		want  string
+	}{
+		{[]string{}, ""},
+		{[]string{"cloudflare"}, "cloudflare"},
+		{[]string{"cloudflare", "akamai"}, "cloudflare and akamai"},
+		{[]string{"cloudflare", "akamai", "datadome"}, "cloudflare, akamai, and datadome"},
+	}
+	for _, tt := range tests {
+		got := formatVendors(tt.input)
+		if got != tt.want {
+			t.Errorf("formatVendors(%v) = %q, want %q", tt.input, got, tt.want)
+		}
 	}
 }

@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"math/rand"
 	"os"
 	"strconv"
 	"strings"
@@ -14,6 +15,18 @@ import (
 	"github.com/jeheskielSunloy77/knockknock/internal/fetch"
 	"github.com/jeheskielSunloy77/knockknock/internal/signature"
 )
+
+var protectedTemplates = []string{
+	"who's there? {vendors}",
+	"who's there? {vendors}",
+	"who's there? {vendors}",
+}
+
+var notProtectedTemplates = []string{
+	"who's there? {answer}",
+	"who's there? {answer}",
+	"who's there? {answer}",
+}
 
 type Config struct {
 	Args    []string
@@ -234,6 +247,14 @@ func parseByteSize(raw string) (int, error) {
 	return n * multiplier, nil
 }
 
+const (
+	colorBold  = "\033[1m"
+	colorRed   = "\033[31m"
+	colorGreen = "\033[32m"
+
+	colorReset = "\033[0m"
+)
+
 func writeVerdict(w io.Writer, verdict detect.Verdict, jsonOut bool) error {
 	if jsonOut {
 		enc := json.NewEncoder(w)
@@ -241,14 +262,46 @@ func writeVerdict(w io.Writer, verdict detect.Verdict, jsonOut bool) error {
 		return enc.Encode(verdict)
 	}
 	if verdict.Protected {
-		if _, err := fmt.Fprintln(w, "protected: yes"); err != nil {
-			return err
+		vendors := formatVendors(verdict.Vendors)
+		if isTerminal(w) {
+			vendors = colorBold + colorRed + vendors + colorReset
 		}
-		_, err := fmt.Fprintf(w, "vendors: %s\n", strings.Join(verdict.Vendors, ", "))
+		tmpl := protectedTemplates[rand.Intn(len(protectedTemplates))]
+		_, err := fmt.Fprintln(w, strings.ReplaceAll(tmpl, "{vendors}", vendors))
 		return err
 	}
-	_, err := fmt.Fprintln(w, "protected: no")
+	tmpl := notProtectedTemplates[rand.Intn(len(notProtectedTemplates))]
+	answer := "No one"
+	if isTerminal(w) {
+		answer = colorGreen + answer + colorReset
+	}
+	_, err := fmt.Fprintln(w, strings.ReplaceAll(tmpl, "{answer}", answer))
 	return err
+}
+
+func isTerminal(w io.Writer) bool {
+	f, ok := w.(*os.File)
+	if !ok {
+		return false
+	}
+	stat, err := f.Stat()
+	if err != nil {
+		return false
+	}
+	return stat.Mode()&os.ModeCharDevice != 0
+}
+
+func formatVendors(vendors []string) string {
+	switch len(vendors) {
+	case 0:
+		return ""
+	case 1:
+		return vendors[0]
+	case 2:
+		return vendors[0] + " and " + vendors[1]
+	default:
+		return strings.Join(vendors[:len(vendors)-1], ", ") + ", and " + vendors[len(vendors)-1]
+	}
 }
 
 func runCompile(cfg Config, args []string) int {

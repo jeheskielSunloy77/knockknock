@@ -19,7 +19,7 @@ func TestRunDetectsFromStdinReadable(t *testing.T) {
 	if code != 0 {
 		t.Fatalf("Run() code = %d, stderr = %s", code, stderr.String())
 	}
-	if !strings.Contains(out.String(), "protected: yes") || !strings.Contains(out.String(), "cloudflare") {
+	if !strings.Contains(out.String(), "who's there?") || !strings.Contains(out.String(), "cloudflare") {
 		t.Fatalf("unexpected output:\n%s", out.String())
 	}
 }
@@ -34,7 +34,7 @@ func TestRunNoDetectionExitOne(t *testing.T) {
 	if code != 1 {
 		t.Fatalf("Run() code = %d, stderr = %s", code, stderr.String())
 	}
-	if strings.TrimSpace(out.String()) != "protected: no" {
+	if !strings.Contains(out.String(), "who's there?") {
 		t.Fatalf("unexpected output: %q", out.String())
 	}
 }
