@@ -25,9 +25,14 @@ jobs:
           ext=""
           if [ "${{ matrix.os }}" = "windows" ]; then ext=".exe"; fi
           GOOS=${{ matrix.os }} GOARCH=${{ matrix.arch }} \
-            go build -ldflags "-X main.version=${GITHUB_REF_NAME#v}" \
+            go build -ldflags "-s -w -X main.version=${GITHUB_REF_NAME#v}" \
+            -trimpath \
             -o "knockknock_${GITHUB_REF_NAME#v}_${{ matrix.os }}_${{ matrix.arch }}${ext}" \
             ./cmd/knockknock
+      - name: Compress with UPX
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq upx-ucl
+          upx --best --lzma "knockknock_${GITHUB_REF_NAME#v}_${{ matrix.os }}_${{ matrix.arch }}${ext}"
       - uses: softprops/action-gh-release@v2
         with:
           files: knockknock_*
