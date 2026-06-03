@@ -42,6 +42,10 @@ func Fetch(rawURL string, opts Options) ([]byte, error) {
 		opts.Profile = DefaultProfile
 	}
 
+	if !strings.Contains(rawURL, "://") {
+		rawURL = "https://" + rawURL
+	}
+
 	var (
 		do  doer
 		err error
