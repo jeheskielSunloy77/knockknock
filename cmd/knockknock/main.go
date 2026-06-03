@@ -2,11 +2,20 @@ package main
 
 import (
 	"os"
+	"runtime/debug"
 
-	"knockknock/internal/cli"
+	"github.com/jeheskielSunloy77/knockknock/internal/cli"
 )
 
 var version = "dev"
+
+func init() {
+	if version == "dev" {
+		if info, ok := debug.ReadBuildInfo(); ok && info.Main.Version != "" {
+			version = info.Main.Version
+		}
+	}
+}
 
 func main() {
 	os.Exit(cli.Run(cli.Config{

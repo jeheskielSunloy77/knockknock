@@ -6,7 +6,7 @@ import (
 	"regexp"
 	"testing"
 
-	"knockknock/internal/signature"
+	"github.com/jeheskielSunloy77/knockknock/internal/signature"
 )
 
 func TestCompileFromRepositorySignatures(t *testing.T) {

@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"knockknock/internal/cli"
+	"github.com/jeheskielSunloy77/knockknock/internal/cli"
 )
 
 func TestRunDetectsFromStdinReadable(t *testing.T) {

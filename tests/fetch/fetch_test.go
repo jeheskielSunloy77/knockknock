@@ -3,7 +3,7 @@ package fetch_test
 import (
 	"testing"
 
-	"knockknock/internal/fetch"
+	"github.com/jeheskielSunloy77/knockknock/internal/fetch"
 )
 
 func TestResolveLocation(t *testing.T) {

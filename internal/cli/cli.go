@@ -9,9 +9,9 @@ import (
 	"strings"
 	"time"
 
-	"knockknock/internal/detect"
-	"knockknock/internal/fetch"
-	"knockknock/internal/signature"
+	"github.com/jeheskielSunloy77/knockknock/internal/detect"
+	"github.com/jeheskielSunloy77/knockknock/internal/fetch"
+	"github.com/jeheskielSunloy77/knockknock/internal/signature"
 )
 
 type Config struct {
@@ -62,9 +62,6 @@ func Run(cfg Config) int {
 	}
 	if cfg.Stderr == nil {
 		cfg.Stderr = io.Discard
-	}
-	if cfg.Version == "" {
-		cfg.Version = "dev"
 	}
 
 	if len(cfg.Args) > 0 && cfg.Args[0] == "compile" {

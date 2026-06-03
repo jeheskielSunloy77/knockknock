@@ -1,0 +1,22 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.24.x'
+          cache: true
+      - run: go build -ldflags "-X main.version=${GITHUB_REF_NAME#v}" ./cmd/knockknock
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: knockknock

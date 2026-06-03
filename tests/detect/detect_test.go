@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	"knockknock/internal/detect"
-	"knockknock/internal/signature"
+	"github.com/jeheskielSunloy77/knockknock/internal/detect"
+	"github.com/jeheskielSunloy77/knockknock/internal/signature"
 )
 
 func TestNormalizeRedirectChainPreservesHeaders(t *testing.T) {
