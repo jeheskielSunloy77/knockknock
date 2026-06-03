@@ -31,3 +31,22 @@ jobs:
       - uses: softprops/action-gh-release@v2
         with:
           files: knockknock_*
+
+  checksums:
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download release assets
+        run: |
+          gh release download "$GITHUB_REF_NAME" \
+            --repo "$GITHUB_REPOSITORY" \
+            --pattern "knockknock_*"
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - name: Generate checksums
+        run: |
+          sha256sum knockknock_* > "knockknock-${GITHUB_REF_NAME#v}-checksums.txt"
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: knockknock-*.txt

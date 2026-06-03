@@ -5,11 +5,25 @@ antibot, WAF, or CAPTCHA vendor.
 
 ## Install
 
+### curl (pre-built binary)
+
+```sh
+curl -sSf https://raw.githubusercontent.com/jeheskielSunloy77/knockknock/main/install.sh | sh
+```
+
+Pass a specific version:
+
+```sh
+curl -sSf https://raw.githubusercontent.com/jeheskielSunloy77/knockknock/main/install.sh | VERSION=0.1.0 sh
+```
+
+### go install
+
 ```sh
 go install github.com/jeheskielSunloy77/knockknock/cmd/knockknock@latest
 ```
 
-Or build from source:
+### build from source
 
 ```sh
 git clone https://github.com/jeheskielSunloy77/knockknock.git
