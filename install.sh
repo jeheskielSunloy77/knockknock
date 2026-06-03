@@ -65,7 +65,7 @@ if [ "$OS" = "windows" ]; then
   BINARY_FILE="${BINARY_FILE}.exe"
 fi
 
-curl -sSfL -o "$TMPDIR/$BINARY" "$BASEURL/$BINARY_FILE"
+curl -sSfL -o "$TMPDIR/$BINARY_FILE" "$BASEURL/$BINARY_FILE"
 curl -sSfL -o "$TMPDIR/checksums.txt" "$BASEURL/$ASSET"
 
 # --- verify checksum ---
@@ -78,7 +78,7 @@ else
   die "neither sha256sum nor shasum found"
 fi
 
-chmod +x "$TMPDIR/$BINARY"
+chmod +x "$TMPDIR/$BINARY_FILE"
 
 # --- install ---
 INSTALL_DIR="/usr/local/bin"
@@ -87,7 +87,7 @@ if [ ! -w "$INSTALL_DIR" ]; then
   mkdir -p "$INSTALL_DIR"
 fi
 
-mv "$TMPDIR/$BINARY" "$INSTALL_DIR/$BIN"
+mv "$TMPDIR/$BINARY_FILE" "$INSTALL_DIR/$BIN"
 info "installed $INSTALL_DIR/$BIN"
 
 # --- verify ---
