@@ -36,15 +36,15 @@ go build -o knockknock ./cmd/knockknock
 It can fetch a URL directly or classify a raw HTTP response from stdin.
 
 ```sh
-knockknock https://example.com
-curl -isS -L https://example.com | knockknock
+knockknock example.com
+curl -isS -L example.com | knockknock
 ```
 
 Default output is human-readable:
 
-```text
-protected: yes
-vendors: cloudflare
+```sh
+knockknock example.com
+who's there? cloudflare
 ```
 
 Use JSON for scraper automation:
