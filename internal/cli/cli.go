@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"os"
 	"strconv"
 	"strings"
 	"time"
@@ -30,6 +31,24 @@ type options struct {
 	timeout   time.Duration
 	bodyCap   int
 	url       string
+}
+
+var banner = "\n" +
+	"██╗  ██╗███╗   ██╗ ██████╗  ██████╗██╗  ██╗██╗  ██╗███╗   ██╗ ██████╗  ██████╗██╗  ██╗\n" +
+	"██║ ██╔╝████╗  ██║██╔═══██╗██╔════╝██║ ██╔╝██║ ██╔╝████╗  ██║██╔═══██╗██╔════╝██║ ██╔╝\n" +
+	"█████╔╝ ██╔██╗ ██║██║   ██║██║     █████╔╝ █████╔╝ ██╔██╗ ██║██║   ██║██║     █████╔╝ \n" +
+	"██╔═██╗ ██║╚██╗██║██║   ██║██║     ██╔═██╗ ██╔═██╗ ██║╚██╗██║██║   ██║██║     ██╔═██╗ \n" +
+	"██║  ██╗██║ ╚████║╚██████╔╝╚██████╗██║  ██╗██║  ██╗██║ ╚████║╚██████╔╝╚██████╗██║  ██╗\n" +
+	"╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝  ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝  ╚═════╝╚═╝  ╚═╝\n" +
+	"\n" +
+	"detect antibot, WAF, and CAPTCHA protections on web pages\n" +
+	"\n" +
+	"examples:\n" +
+	"  knockknock https://example.com\n" +
+	"  curl -isS -L https://example.com | knockknock\n"
+
+func printBanner(w io.Writer) {
+	fmt.Fprint(w, banner)
 }
 
 const usage = `knockknock - detect antibot/WAF/CAPTCHA protection on a page.
@@ -80,6 +99,15 @@ func Run(cfg Config) int {
 	case "version":
 		fmt.Fprintf(cfg.Stdout, "knockknock %s\n", cfg.Version)
 		return 0
+	}
+
+	if opts.url == "" {
+		if f, ok := cfg.Stdin.(*os.File); ok {
+			if stat, err := f.Stat(); err == nil && (stat.Mode()&os.ModeCharDevice) != 0 {
+				printBanner(cfg.Stdout)
+				return 0
+			}
+		}
 	}
 
 	regexText := detect.PresenceRegexText
