@@ -2,6 +2,8 @@ package cli
 
 import (
 	"bytes"
+	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 
@@ -88,3 +90,83 @@ func TestFormatVendors(t *testing.T) {
 		}
 	}
 }
+
+func TestSkillEmbeddedMatchesSource(t *testing.T) {
+	sourcePath := filepath.Join("..", "..", "skills", "knockknock", "SKILL.md")
+	content, err := os.ReadFile(sourcePath)
+	if err != nil {
+		t.Fatalf("failed to read %s: %v", sourcePath, err)
+	}
+	if string(content) != SkillContent {
+		t.Fatalf("embedded SkillContent differs from %s", sourcePath)
+	}
+}
+
+func TestSkillUsage(t *testing.T) {
+	var stdout bytes.Buffer
+	code := Run(Config{
+		Args:   []string{"skill"},
+		Stdout: &stdout,
+	})
+	if code != 0 {
+		t.Fatalf("expected code 0, got %d", code)
+	}
+	if !strings.Contains(stdout.String(), "knockknock skill") {
+		t.Fatalf("expected skill usage in stdout, got: %s", stdout.String())
+	}
+}
+
+func TestSkillShow(t *testing.T) {
+	var stdout bytes.Buffer
+	code := Run(Config{
+		Args:   []string{"skill", "show"},
+		Stdout: &stdout,
+	})
+	if code != 0 {
+		t.Fatalf("expected code 0, got %d", code)
+	}
+	if !strings.Contains(stdout.String(), "name: knockknock") {
+		t.Fatalf("expected skill frontmatter in stdout, got: %s", stdout.String())
+	}
+}
+
+func TestSkillInstallCustomDir(t *testing.T) {
+	tmpDir := t.TempDir()
+	var stdout bytes.Buffer
+	code := Run(Config{
+		Args:   []string{"skill", "install", "--dir", tmpDir},
+		Stdout: &stdout,
+	})
+	if code != 0 {
+		t.Fatalf("expected code 0, got %d", code)
+	}
+	installedFile := filepath.Join(tmpDir, "SKILL.md")
+	data, err := os.ReadFile(installedFile)
+	if err != nil {
+		t.Fatalf("failed to read installed skill file: %v", err)
+	}
+	if string(data) != SkillContent {
+		t.Fatalf("installed content does not match SkillContent")
+	}
+}
+
+func TestInstallSkillAlias(t *testing.T) {
+	tmpDir := t.TempDir()
+	var stdout bytes.Buffer
+	code := Run(Config{
+		Args:   []string{"install-skill", "--dir", tmpDir},
+		Stdout: &stdout,
+	})
+	if code != 0 {
+		t.Fatalf("expected code 0, got %d", code)
+	}
+	installedFile := filepath.Join(tmpDir, "SKILL.md")
+	data, err := os.ReadFile(installedFile)
+	if err != nil {
+		t.Fatalf("failed to read installed skill file: %v", err)
+	}
+	if string(data) != SkillContent {
+		t.Fatalf("installed content does not match SkillContent")
+	}
+}
+

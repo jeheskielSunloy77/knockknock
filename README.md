@@ -5,6 +5,29 @@ antibot, WAF, or CAPTCHA vendor.
 
 ![knockknock demo](assets/demo.png)
 
+## AI Agent Quickstart
+
+Copy and paste this prompt to your AI coding agent (Claude Code, Cursor, Windsurf, Codex, Antigravity, etc.) to install both the CLI and the skill:
+
+```text
+Install the knockknock CLI and its AI agent skill:
+1. Run: curl -sSf https://raw.githubusercontent.com/jeheskielSunloy77/knockknock/main/install.sh | sh
+2. Run: knockknock skill install -g (or `npx skills add jeheskielSunloy77/knockknock`)
+3. Verify: knockknock --version
+Use knockknock whenever diagnosing 403/429 HTTP blocks, checking antibot/WAF defenses (Cloudflare, Akamai, DataDome, Kasada, AWS WAF, etc.), or profiling scraping targets. Always pass `--json`.
+```
+
+### Manual Skill Installation
+
+```sh
+# Via skills.sh / npx
+npx skills add jeheskielSunloy77/knockknock
+
+# Or using knockknock CLI once installed
+knockknock skill install     # project-level (.agents/skills/knockknock/SKILL.md)
+knockknock skill install -g  # global (~/.agents/skills/knockknock/SKILL.md)
+```
+
 ## Install
 
 ### curl (pre-built binary)

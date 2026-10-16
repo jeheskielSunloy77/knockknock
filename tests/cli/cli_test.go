@@ -2,6 +2,8 @@ package cli_test
 
 import (
 	"bytes"
+	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 
@@ -65,3 +67,54 @@ func TestRunUnknownFlag(t *testing.T) {
 		t.Fatalf("stderr = %q", stderr.String())
 	}
 }
+
+func TestRunSkillShow(t *testing.T) {
+	var stdout, stderr bytes.Buffer
+	code := cli.Run(cli.Config{
+		Args:   []string{"skill", "show"},
+		Stdout: &stdout,
+		Stderr: &stderr,
+	})
+	if code != 0 {
+		t.Fatalf("Run() code = %d, stderr = %s", code, stderr.String())
+	}
+	if !strings.Contains(stdout.String(), "name: knockknock") {
+		t.Fatalf("unexpected stdout:\n%s", stdout.String())
+	}
+}
+
+func TestRunSkillInstall(t *testing.T) {
+	tmpDir := t.TempDir()
+	var stdout, stderr bytes.Buffer
+	code := cli.Run(cli.Config{
+		Args:   []string{"skill", "install", "--dir", tmpDir},
+		Stdout: &stdout,
+		Stderr: &stderr,
+	})
+	if code != 0 {
+		t.Fatalf("Run() code = %d, stderr = %s", code, stderr.String())
+	}
+	content, err := os.ReadFile(filepath.Join(tmpDir, "SKILL.md"))
+	if err != nil {
+		t.Fatalf("reading installed skill: %v", err)
+	}
+	if !strings.Contains(string(content), "name: knockknock") {
+		t.Fatalf("invalid skill content:\n%s", string(content))
+	}
+}
+
+func TestRunSkillUnknown(t *testing.T) {
+	var stdout, stderr bytes.Buffer
+	code := cli.Run(cli.Config{
+		Args:   []string{"skill", "nonexistent"},
+		Stdout: &stdout,
+		Stderr: &stderr,
+	})
+	if code != 2 {
+		t.Fatalf("expected code 2, got %d", code)
+	}
+	if !strings.Contains(stderr.String(), "unknown command") {
+		t.Fatalf("unexpected stderr: %s", stderr.String())
+	}
+}
+

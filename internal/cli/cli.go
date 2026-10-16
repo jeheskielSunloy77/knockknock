@@ -81,6 +81,8 @@ Options:
   -v, --version      show version and exit
 
 Commands:
+  skill [install|show] [-g|--global] [--dir path]
+          install or inspect the AI agent skill
   compile [--dir signatures] [--out internal/detect/regex_presence.re2.txt]
           [--challenge-out internal/detect/regex_challenge.re2.txt]
 `
@@ -94,6 +96,10 @@ func Run(cfg Config) int {
 	}
 	if cfg.Stderr == nil {
 		cfg.Stderr = io.Discard
+	}
+
+	if len(cfg.Args) > 0 && (cfg.Args[0] == "skill" || cfg.Args[0] == "install-skill") {
+		return runSkill(cfg, cfg.Args)
 	}
 
 	if len(cfg.Args) > 0 && cfg.Args[0] == "compile" {
