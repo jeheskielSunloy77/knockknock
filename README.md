@@ -3,6 +3,8 @@
 `knockknock` is a Go CLI for detecting whether a page is protected by an
 antibot, WAF, or CAPTCHA vendor.
 
+![knockknock demo](assets/demo.png)
+
 ## Install
 
 ### curl (pre-built binary)
