@@ -1,0 +1,10 @@
+{
+  "vendor": "altcha",
+  "signals": [
+    "B:.*\\b(?:altcha\\.org|cdn\\.jsdelivr\\.net/npm/altcha)",
+    "B:.*\\baltcha(?:\\.min)?\\.js\\b",
+    "B:.*<altcha-widget\\b",
+    "B:.*\\baltcha_payload\\b",
+    "B:.*\\bname=[\"']?altcha\\b"
+  ]
+}

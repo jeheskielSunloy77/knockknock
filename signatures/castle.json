@@ -1,0 +1,11 @@
+{
+  "vendor": "castle",
+  "signals": [
+    "H:x-castle-client-id:",
+    "H:x-castle-request-token:",
+    "H:set-cookie:__cuid=",
+    "B:.*\\bc\\.castle\\.io/v\\d/c\\.js",
+    "B:.*\\b_castle\\('",
+    "B:.*\\bCastle\\.(?:create|configure)"
+  ]
+}

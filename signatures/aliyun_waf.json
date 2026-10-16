@@ -1,0 +1,18 @@
+{
+  "vendor": "aliyun_waf",
+  "signals": [
+    "H:set-cookie:acw_tc=",
+    "H:set-cookie:acw_sc__v2=",
+    "H:set-cookie:ali_apache_tracktmp=",
+    "H:x-powered-by-aliyun:",
+    "B:.*\\balibaba-cloud-waf\\b",
+    "B:.*waf\\.aliyun\\.com",
+    "B:.*static\\.alicdn\\.com/waf",
+    "B:.*\\bAlicdnWafChallenge\\b"
+  ],
+  "challenge": [
+    "H:set-cookie:acw_sc__v2=",
+    "B:.*static\\.alicdn\\.com/waf",
+    "B:.*\\bAlicdnWafChallenge\\b"
+  ]
+}

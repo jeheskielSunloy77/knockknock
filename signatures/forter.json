@@ -1,0 +1,11 @@
+{
+  "vendor": "forter",
+  "signals": [
+    "H:set-cookie:ftr_blist=",
+    "H:set-cookie:ftr_nblist=",
+    "B:.*\\bcdn[0-9]*\\.forter\\.com",
+    "B:.*\\bforter\\.js\\b",
+    "B:.*\\bwindow\\.ftr__",
+    "B:.*\\bForter\\b.*(?:opt/load|token)"
+  ]
+}

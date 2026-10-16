@@ -1,0 +1,9 @@
+{
+  "vendor": "mcaptcha",
+  "signals": [
+    "B:.*\\bmcaptcha\\.org\\b",
+    "B:.*\\b(?:mcaptcha/widget|m-captcha(?:\\.min)?\\.js)\\b",
+    "B:.*<m-captcha\\b",
+    "B:.*\\bdata-mcaptcha_url\\b"
+  ]
+}

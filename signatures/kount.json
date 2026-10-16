@@ -1,0 +1,9 @@
+{
+  "vendor": "kount",
+  "signals": [
+    "B:.*\\b(?:ssl|kaptcha|ka|logo)\\.kount\\.net",
+    "B:.*\\bka\\.js\\b.*kount",
+    "B:.*\\bkount-fraud-protection\\b",
+    "B:.*\\bKountSDK\\b"
+  ]
+}

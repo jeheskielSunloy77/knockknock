@@ -1,0 +1,14 @@
+{
+  "vendor": "barracuda",
+  "signals": [
+    "H:set-cookie:barra_counter_session=",
+    "H:set-cookie:BNI_persistence=",
+    "H:set-cookie:BNI__BARRACUDA_COOKIE_=",
+    "H:set-cookie:BNES_",
+    "B:.*\\bBarracuda Networks\\b.*Web Application Firewall",
+    "B:.*\\bYou are attempting to access a forbidden site\\b.*Barracuda"
+  ],
+  "challenge": [
+    "B:.*\\bYou are attempting to access a forbidden site\\b.*Barracuda"
+  ]
+}

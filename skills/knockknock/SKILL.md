@@ -5,7 +5,7 @@ description: Detect whether a website or HTTP response is protected by an antibo
 
 # knockknock
 
-Fast CLI to identify 20+ antibot, WAF, and CAPTCHA providers from HTTP responses.
+Fast CLI to identify 35+ antibot, WAF, and CAPTCHA providers from HTTP responses.
 
 ## Key Rules for AI Agents
 

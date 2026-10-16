@@ -1,0 +1,16 @@
+{
+  "vendor": "azure_waf",
+  "signals": [
+    "H:x-azure-ref:",
+    "H:x-msedge-ref:",
+    "H:x-azure-fdid:",
+    "B:.*Our apologies, but the web page you are looking for has been blocked",
+    "B:.*Azure Application Gateway WAF",
+    "B:.*Azure Front Door.*(?:blocked|restricted)"
+  ],
+  "challenge": [
+    "B:.*Our apologies, but the web page you are looking for has been blocked",
+    "B:.*Azure Application Gateway WAF",
+    "B:.*Azure Front Door.*(?:blocked|restricted)"
+  ]
+}

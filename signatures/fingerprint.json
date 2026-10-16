@@ -1,0 +1,10 @@
+{
+  "vendor": "fingerprint",
+  "signals": [
+    "B:.*(?:api\\.fpjs\\.io|fpcdn\\.io)",
+    "B:.*@fingerprintjs/fingerprintjs",
+    "B:.*\\bFingerprintJS\\b",
+    "B:.*client\\.getVisitorData\\(",
+    "B:.*\\bfp\\.js\\?apiKey="
+  ]
+}

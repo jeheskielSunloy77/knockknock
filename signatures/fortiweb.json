@@ -1,0 +1,13 @@
+{
+  "vendor": "fortiweb",
+  "signals": [
+    "H:set-cookie:FORTIWAFID=",
+    "H:set-cookie:FORTIWAF_",
+    "B:.*(?i:The page you are trying to access is restricted.*Forti(?:Web|Gate))",
+    "B:.*\\bFortiWeb\\b.*Application Firewall",
+    "B:.*\\.fortigate\\.com"
+  ],
+  "challenge": [
+    "B:.*(?i:The page you are trying to access is restricted.*Forti(?:Web|Gate))"
+  ]
+}

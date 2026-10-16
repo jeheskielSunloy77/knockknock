@@ -1,0 +1,11 @@
+{
+  "vendor": "netscaler",
+  "signals": [
+    "H:set-cookie:ns_af=",
+    "H:set-cookie:citrix_ns_id=",
+    "H:set-cookie:NSC_",
+    "H:set-cookie:pwcount=",
+    "B:.*\\bAppFirewall\\b.*Citrix",
+    "B:.*\\bNS-CACHE\\b"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "vendor": "radware",
+  "signals": [
+    "H:set-cookie:__ss_uuid=",
+    "H:set-cookie:__ss_track=",
+    "H:set-cookie:ss_uuid=",
+    "H:x-sl-comp:",
+    "H:x-radware-",
+    "B:.*\\bcdn\\.shieldsquare\\.com\\b",
+    "B:.*\\bss_slider\\b",
+    "B:.*\\bRadware Bot Manager\\b",
+    "B:.*\\bShieldSquare\\b",
+    "B:.*validateCaptcha\\?",
+    "B:.*Why did this happen\\?.*shieldsquare"
+  ],
+  "challenge": [
+    "B:.*\\bss_slider\\b",
+    "B:.*\\bRadware Bot Manager\\b",
+    "B:.*validateCaptcha\\?",
+    "B:.*Why did this happen\\?.*shieldsquare"
+  ]
+}

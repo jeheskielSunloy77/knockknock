@@ -1,0 +1,9 @@
+{
+  "vendor": "sift",
+  "signals": [
+    "B:.*\\bcdn\\.sift\\.com/s\\.js",
+    "B:.*\\bcdn\\.siftscience\\.com/s\\.js",
+    "B:.*\\b_sift\\.push",
+    "B:.*\\bwindow\\.sift\\b"
+  ]
+}

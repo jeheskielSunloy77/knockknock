@@ -1,0 +1,15 @@
+{
+  "vendor": "signal_sciences",
+  "signals": [
+    "H:x-sigsci-tags:",
+    "H:x-sigsci-request-id:",
+    "H:x-sigsci-agentresponse:",
+    "B:.*\\bSignal Sciences\\b",
+    "B:.*\\bProtected by Signal Sciences\\b",
+    "B:.*sigsci-agent"
+  ],
+  "challenge": [
+    "B:.*\\bSignal Sciences\\b",
+    "B:.*\\bProtected by Signal Sciences\\b"
+  ]
+}
