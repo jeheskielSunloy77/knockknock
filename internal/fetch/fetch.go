@@ -6,6 +6,7 @@ import (
 	"io"
 	stdhttp "net/http"
 	"net/url"
+	"os"
 	"strings"
 	"time"
 
@@ -13,6 +14,12 @@ import (
 	tlsclient "github.com/bogdanfinn/tls-client"
 	"github.com/bogdanfinn/tls-client/profiles"
 )
+
+func init() {
+	if _, set := os.LookupEnv("QUIC_GO_DISABLE_RECEIVE_BUFFER_WARNING"); !set {
+		_ = os.Setenv("QUIC_GO_DISABLE_RECEIVE_BUFFER_WARNING", "true")
+	}
+}
 
 const DefaultProfile = "chrome_133"
 const DefaultTimeout = 30 * time.Second
