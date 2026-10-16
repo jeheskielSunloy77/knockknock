@@ -1,15 +1,15 @@
 package cli
 
 import (
-	_ "embed"
 	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
+
+	knockknockskill "github.com/jeheskielSunloy77/knockknock/skills/knockknock"
 )
 
-//go:embed skill.md
-var SkillContent string
+var SkillContent = knockknockskill.Content
 
 const skillUsage = `knockknock skill - manage and install AI agent skill
 
