@@ -1,5 +1,7 @@
 # knockknock
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 `knockknock` is a Go CLI for detecting whether a page is protected by an
 antibot, WAF, or CAPTCHA vendor.
 
@@ -114,3 +116,7 @@ go run ./cmd/knockknock compile
 
 Signature source files live in `signatures/*.json`. The `compile` command
 regenerates the embedded RE2 artifacts in `internal/detect/`.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
