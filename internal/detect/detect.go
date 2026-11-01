@@ -2,6 +2,7 @@ package detect
 
 import (
 	_ "embed"
+	"html"
 	"regexp"
 	"sort"
 	"strings"
@@ -104,7 +105,7 @@ func Normalize(raw []byte, bodyCap int) string {
 	if r := []rune(body); len(r) > bodyCap {
 		body = string(r[:bodyCap])
 	}
-	out = append(out, "B:"+stripBodyChar.Replace(body))
+	out = append(out, "B:"+stripBodyChar.Replace(html.UnescapeString(body)))
 	return strings.Join(out, "\n")
 }
 
