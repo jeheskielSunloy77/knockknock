@@ -117,3 +117,34 @@ func TestNewVendorsDetection(t *testing.T) {
 	}
 }
 
+func TestAkamaiHTMLEntityEncodedReference(t *testing.T) {
+	raw := []byte("HTTP/2 403 Forbidden\r\nContent-Type: text/html\r\n\r\n<html>Access Denied. Reference&#32;&#35;18&#46;9efa3f17&#46;1792539138&#46;32dec4a</html>")
+	for _, tc := range []struct {
+		name  string
+		regex string
+	}{
+		{"presence", detect.PresenceRegexText},
+		{"challenge", detect.ChallengeRegexText},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			got, err := detect.Detect(raw, tc.regex, detect.DefaultBodyCap)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if !got.Protected || !reflect.DeepEqual(got.Vendors, []string{"akamai"}) {
+				t.Fatalf("Detect() = %+v, want Akamai detected", got)
+			}
+		})
+	}
+}
+
+func TestNormalizeUnescapesOnlyBody(t *testing.T) {
+	raw := []byte("HTTP/1.1 200 OK\r\nX-Test: a&amp;b\r\n\r\nValue&#32;&#35;42")
+	got := detect.Normalize(raw, detect.DefaultBodyCap)
+	if !strings.Contains(got, "H:x-test:a&amp;b") {
+		t.Fatalf("header unexpectedly modified: %q", got)
+	}
+	if !strings.Contains(got, "B:Value #42") {
+		t.Fatalf("body entities not decoded: %q", got)
+	}
+}
